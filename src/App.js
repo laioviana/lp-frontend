@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
 import { Provider } from "react-redux";
-import { Redirect, Route, Switch,BrowserRouter } from "react-router-dom";
+import { Route, Switch,BrowserRouter } from "react-router-dom";
 import MenuAppBar from './components/MenuAppBar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
