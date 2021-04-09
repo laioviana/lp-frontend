@@ -1,25 +1,50 @@
-import logo from './logo.svg';
-import './App.css';
+import { makeStyles } from '@material-ui/core';
+import React from 'react';
+import { Provider } from "react-redux";
+import { Redirect, Route, Switch,BrowserRouter } from "react-router-dom";
+import MenuAppBar from './components/MenuAppBar';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import ListProperty from './pages/ListProperty';
+import DetailProperty from './pages/DetailProperty';
+import store from "./redux/store";
 
-function App() {
+const useStyles = makeStyles({
+  contentWidth: {
+    width: '100%',
+    margin: 'auto',
+    padding: '0px 20px'
+  },
+  alert: {
+    marginTop: 10
+  }
+});
+
+
+export default function App() {
+  const classes = useStyles();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <React.Fragment>
+      <MenuAppBar />
+      <div className={classes.contentWidth}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route exact path="/list/:search">
+            <ListProperty />
+          </Route>
+          <Route exact path="/detail">
+            <DetailProperty />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+      </div>
+      <Footer />
+      </React.Fragment>
+    </Provider>
   );
 }
-
-export default App;
